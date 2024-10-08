@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "phoupraw.mcmod.loadedmodschecker.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [],
+  "plugin": "phoupraw.mcmod.loadedmodschecker.mixins.LoadedModsCheckerMixinConfigPlugin",
+  "priority": 10000
+}
