@@ -22,7 +22,7 @@ final class ChineseGen extends FabricLanguageProvider {
         b.add("modmenu.descriptionTranslation." + ID, """
           每次进入存档时会比对当前加载的模组与上次进入存档时加载的模组是否一致，如果检测到不一致，则并提示有哪些模组不一致，并允许玩家不加载存档直接返回。 
           """);
-        b.add(MMIntegratedServerLoader.TITLE, "当前加载的模组与上次加载的模组有所不同");
+        b.add(MMIntegratedServerLoader.TITLE, "当前加载的模组与上次进入《%s》时的有所不同");
         b.add(MMIntegratedServerLoader.NEW, "新增：");
         b.add(MMIntegratedServerLoader.DELETED, "移除：");
         b.add(MMIntegratedServerLoader.UPDATED, "更新：");

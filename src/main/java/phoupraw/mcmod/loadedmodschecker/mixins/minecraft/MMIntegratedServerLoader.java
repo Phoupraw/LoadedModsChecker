@@ -83,7 +83,7 @@ public interface MMIntegratedServerLoader {
                 original.call(session, levelProperties, safeMode, onCancel);
                 break check;
             }
-            Text title = Text.translatable(TITLE);
+            Text title = Text.translatable(TITLE,session.getDirectoryName());
             List<Text> messeges = new ObjectArrayList<>();
             if (!newMods.isEmpty()) {
                 messeges.add(Text.translatable(NEW).formatted(Formatting.AQUA));

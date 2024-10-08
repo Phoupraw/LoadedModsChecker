@@ -22,7 +22,7 @@ final class EnglishGen extends FabricLanguageProvider {
         b.add("modmenu.descriptionTranslation." + ID, """
           Every time you enter a world, it will compare whether the currently loaded mods are consistent with the mods loaded the last time. If any inconsistency is detected, it will prompt which mods are inconsistent and allow you to return directly without loading the world. 
           """);
-        b.add(MMIntegratedServerLoader.TITLE, "The currently loaded mods are different from the last time");
+        b.add(MMIntegratedServerLoader.TITLE, "The currently loaded mods are different from the last time enter §o%s§r");
         b.add(MMIntegratedServerLoader.NEW, "New:");
         b.add(MMIntegratedServerLoader.DELETED, "Deleted:");
         b.add(MMIntegratedServerLoader.UPDATED, "Updated:");

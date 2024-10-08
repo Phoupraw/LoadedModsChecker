@@ -2,7 +2,7 @@
   "gui.loadedmodschecker.deleted": "Deleted:",
   "gui.loadedmodschecker.new": "New:",
   "gui.loadedmodschecker.rollbacked": "Rollbacked:",
-  "gui.loadedmodschecker.title": "The currently loaded mods are different from the last time",
+  "gui.loadedmodschecker.title": "The currently loaded mods are different from the last time enter §o%s§r",
   "gui.loadedmodschecker.updated": "Updated:",
   "modmenu.descriptionTranslation.loadedmodschecker": "Every time you enter a world, it will compare whether the currently loaded mods are consistent with the mods loaded the last time. If any inconsistency is detected, it will prompt which mods are inconsistent and allow you to return directly without loading the world. \n",
   "modmenu.nameTranslation.loadedmodschecker": "Loaded Mods Checker",
