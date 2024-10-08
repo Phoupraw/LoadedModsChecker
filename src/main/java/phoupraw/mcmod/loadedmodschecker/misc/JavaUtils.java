@@ -5,6 +5,7 @@ import com.google.common.collect.MultimapBuilder;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
 
@@ -21,5 +22,14 @@ public interface JavaUtils {
             reversed.put(entry.getValue(), entry.getKey());
         }
         return reversed;
+    }
+    /**
+     @see Comparator#compare
+     */
+    static <T> int compareNothing(T o1, T o2) {
+        return 0;
+    }
+    static <T> Comparator<T> comparingNothing() {
+        return JavaUtils::compareNothing;
     }
 }

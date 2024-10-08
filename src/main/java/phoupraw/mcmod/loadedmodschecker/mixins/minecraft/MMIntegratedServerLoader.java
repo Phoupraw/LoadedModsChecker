@@ -24,24 +24,30 @@ import net.minecraft.util.WorldSavePath;
 import net.minecraft.world.level.storage.LevelStorage;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
-import phoupraw.mcmod.loadedmodschecker.LoadedModsChecker;
 import phoupraw.mcmod.loadedmodschecker.misc.CheckingScreen;
+import phoupraw.mcmod.loadedmodschecker.misc.JavaUtils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
+import static phoupraw.mcmod.loadedmodschecker.LoadedModsChecker.ID;
 import static phoupraw.mcmod.loadedmodschecker.LoadedModsChecker.LOGGER;
 
 @ApiStatus.Internal
 public interface MMIntegratedServerLoader {
+    String TITLE = "gui."+ID+".title";
+    String NEW = "gui."+ID+".new";
+    String DELETED = "gui."+ID+".deleted";
+    String UPDATED = "gui."+ID+".updated";
+    String ROLLBACKED = "gui."+ID+".rollbacked";
     static void checkAndWait(LevelStorage.Session session, Dynamic<?> levelProperties, boolean safeMode, Runnable onCancel, Operation<Void> original, MinecraftClient client) {
-        Path path = session.getDirectory(WorldSavePath.ROOT).resolve("serverconfig").resolve(LoadedModsChecker.ID + ".mods.json");
+        Path path = session.getDirectory(WorldSavePath.ROOT).resolve("serverconfig").resolve(ID + ".mods.json");
         Map<String, Version> loadedMods = new Object2ObjectLinkedOpenHashMap<>();
         for (ModContainer modContainer : FabricLoader.getInstance().getAllMods()) {
             ModMetadata metadata = modContainer.getMetadata();
@@ -77,39 +83,48 @@ public interface MMIntegratedServerLoader {
                 original.call(session, levelProperties, safeMode, onCancel);
                 break check;
             }
-            Text title = Text.literal("当前加载的模组与上次加载的模组有所不同");
+            Text title = Text.translatable(TITLE);
             List<Text> messeges = new ObjectArrayList<>();
             if (!newMods.isEmpty()) {
-                messeges.add(Text.literal("新增模组：").formatted(Formatting.BLUE));
+                messeges.add(Text.translatable(NEW).formatted(Formatting.AQUA));
                 for (Map.Entry<String, Version> entry : newMods.entrySet()) {
                     messeges.add(Text.literal(entry.getKey() + " : " + entry.getValue().getFriendlyString()));
                 }
             }
             if (!deletedMods.isEmpty()) {
-                messeges.add(Text.literal("移除模组：").formatted(Formatting.RED));
+                messeges.add(Text.translatable(DELETED).formatted(Formatting.RED));
                 for (Map.Entry<String, Version> entry : deletedMods.entrySet()) {
                     messeges.add(Text.literal(entry.getKey() + " : " + entry.getValue().getFriendlyString()));
                 }
             }
             if (!updatedMods.isEmpty()) {
-                messeges.add(Text.literal("更新模组：").formatted(Formatting.AQUA));
+                messeges.add(Text.translatable(UPDATED).formatted(Formatting.GREEN));
                 for (var entry : updatedMods.entrySet()) {
                     Pair<Version, Version> pair = entry.getValue();
                     messeges.add(Text.literal(entry.getKey() + " : " + pair.left().getFriendlyString() + " -> " + pair.right().getFriendlyString()));
                 }
             }
             if (!rollbackedMods.isEmpty()) {
-                messeges.add(Text.literal("回退模组：").formatted(Formatting.GOLD));
+                messeges.add(Text.translatable(ROLLBACKED).formatted(Formatting.GOLD));
                 for (var entry : rollbackedMods.entrySet()) {
                     Pair<Version, Version> pair = entry.getValue();
                     messeges.add(Text.literal(entry.getKey() + " : " + pair.left().getFriendlyString() + " -> " + pair.right().getFriendlyString()));
                 }
             }
+            var info = new StringJoiner(System.lineSeparator());
+            info.add(title.getString());
+            for (Text messege : messeges) {
+                info.add(messege.getString());
+            }
+            LOGGER.info(info);
             Screen[] checkingScreen = new Screen[1];
             checkingScreen[0] = new CheckingScreen(title, messeges, ImmutableList.of(
               new DialogScreen.ChoiceButton(Text.translatable("gui.continue"), button -> {
                   checkingScreen[0].close();
                   saveMods(session, levelProperties, safeMode, onCancel,original,path,loadedMods);
+              }),
+              new DialogScreen.ChoiceButton(Text.translatable("chat.copy"),button -> {
+                  client.keyboard.setClipboard(info.toString());
               }),
               new DialogScreen.ChoiceButton(Text.translatable("gui.back"), button -> {
                   checkingScreen[0].close();
@@ -156,7 +171,7 @@ public interface MMIntegratedServerLoader {
                 for (Map.Entry<String, Version> entry : loadedMods.entrySet()) {
                     jsonLoadedMods.addProperty(entry.getKey(), entry.getValue().getFriendlyString());
                 }
-                JsonHelper.writeSorted(writer, jsonLoadedMods, Comparator.naturalOrder());
+                JsonHelper.writeSorted(writer, jsonLoadedMods, JavaUtils.comparingNothing());
             }
         } catch (IOException e) {
             LOGGER.throwing(e);

@@ -1,0 +1,10 @@
+{
+  "gui.loadedmodschecker.deleted": "移除：",
+  "gui.loadedmodschecker.new": "新增：",
+  "gui.loadedmodschecker.rollbacked": "回退：",
+  "gui.loadedmodschecker.title": "当前加载的模组与上次加载的模组有所不同",
+  "gui.loadedmodschecker.updated": "更新：",
+  "modmenu.descriptionTranslation.loadedmodschecker": "每次进入存档时会比对当前加载的模组与上次进入存档时加载的模组是否一致，如果检测到不一致，则并提示有哪些模组不一致，并允许玩家不加载存档直接返回。 \n",
+  "modmenu.nameTranslation.loadedmodschecker": "存档模组核对",
+  "modmenu.summaryTranslation.loadedmodschecker": "进入存档时检测与上次相比是否缺失模组"
+}

@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "id": "loadedmodschecker",
   "version": "${version}",
-  "name": "Voxel Cake",
-  "description": "体素糕点",
+  "name": "Loaded Mods Checker",
+  "description": "存档模组核对",
   "authors": ["Phoupraw"],
   "contact": {
-    "homepage": "https://www.mcmod.cn/class/TODO.html",
-    "sources": "https://github.com/Phoupraw/VoxelCake",
-    "issues": "https://github.com/Phoupraw/VoxelCake/issues"
+    "_homepage": "https://www.mcmod.cn/class/TODO.html",
+    "sources": "https://github.com/Phoupraw/LoadedModsChecker",
+    "issues": "https://github.com/Phoupraw/LoadedModsChecker/issues"
   },
   "entrypoints": {
     "main": ["phoupraw.mcmod.loadedmodschecker.LoadedModsChecker"],
