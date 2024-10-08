@@ -1,0 +1,10 @@
+{
+  "type": "voxelcake:direct_block",
+  "blockState": {
+    "Name": "minecraft:nether_wart_block"
+  },
+  "foodComponent": {
+    "nutrition": 3,
+    "saturation": 2.0
+  }
+}

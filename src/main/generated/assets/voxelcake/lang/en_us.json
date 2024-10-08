@@ -1,0 +1,13 @@
+{
+  "block.voxelcake.cream": "奶油",
+  "block.voxelcake.filled_cauldron": "装满甜浆果的炼药锅",
+  "block.voxelcake.manual_basin": "工作釜",
+  "block.voxelcake.sweet_berry_jam": "甜浆果酱",
+  "block.voxelcake.voxel_cake": "体素糕点",
+  "item.voxelcake.bucketed_cream": "桶装奶油",
+  "item.voxelcake.bucketed_sweet_berry_jam": "桶装甜浆果酱",
+  "item.voxelcake.kelp_ash": "海带灰烬",
+  "modmenu.descriptionTranslation.voxelcake": " \n\n",
+  "modmenu.nameTranslation.voxelcake": "体素糕点",
+  "modmenu.summaryTranslation.voxelcake": "用方块充当体素制作单方块糕点"
+}

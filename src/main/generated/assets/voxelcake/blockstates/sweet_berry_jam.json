@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "voxelcake:block/sweet_berry_jam"
+      },
+      {
+        "model": "voxelcake:block/sweet_berry_jam",
+        "y": 90
+      },
+      {
+        "model": "voxelcake:block/sweet_berry_jam",
+        "y": 180
+      },
+      {
+        "model": "voxelcake:block/sweet_berry_jam",
+        "y": 270
+      }
+    ]
+  }
+}

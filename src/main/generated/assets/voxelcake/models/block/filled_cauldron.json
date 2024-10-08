@@ -1,0 +1,6 @@
+{
+  "parent": "voxelcake:block/cauldron/full",
+  "textures": {
+    "content": "voxelcake:block/sweet_berry_jam"
+  }
+}

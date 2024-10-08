@@ -1,0 +1,14 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minecraft:block/cauldron"
+      }
+    },
+    {
+      "apply": {
+        "model": "voxelcake:block/filled_cauldron"
+      }
+    }
+  ]
+}

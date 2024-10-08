@@ -1,0 +1,10 @@
+{
+  "type": "voxelcake:direct_block",
+  "blockState": {
+    "Name": "minecraft:warped_wart_block"
+  },
+  "foodComponent": {
+    "nutrition": 4,
+    "saturation": 3.0
+  }
+}

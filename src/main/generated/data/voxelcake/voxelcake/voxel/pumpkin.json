@@ -1,0 +1,10 @@
+{
+  "type": "voxelcake:direct_block",
+  "blockState": {
+    "Name": "minecraft:pumpkin"
+  },
+  "foodComponent": {
+    "nutrition": 14,
+    "saturation": 8.0
+  }
+}

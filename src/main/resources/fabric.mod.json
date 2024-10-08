@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "voxelcake",
+  "version": "${version}",
+  "name": "Voxel Cake",
+  "description": "体素糕点",
+  "authors": ["Phoupraw"],
+  "contact": {
+    "homepage": "https://www.mcmod.cn/class/TODO.html",
+    "sources": "https://github.com/Phoupraw/VoxelCake",
+    "issues": "https://github.com/Phoupraw/VoxelCake/issues"
+  },
+  "entrypoints": {
+    "main": ["phoupraw.mcmod.voxelcake.VoxelCake"],
+    "client": ["phoupraw.mcmod.voxelcake.VoxelCakeClient"],
+    "fabric-datagen": ["phoupraw.mcmod.voxelcake.datagen.VoxelCakeDataGen"],
+    "modmenu": ["phoupraw.mcmod.voxelcake.config.VoxelCakeModMenuApi"]
+  },
+  "environment": "*",
+  "depends": {
+    "fabricloader": "*",
+    "fabric-api": "*"
+  },
+  "mixins": ["voxelcake.mixins.json"],
+  "icon": "assets/voxelcake/icon.png",
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.modrinth": "https://modrinth.com/project/voxelcake",
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/voxelcake"
+      }
+    }
+  },
+  "license": "MPL-2.0",
+  "accessWidener": "voxelcake.accessWidener"
+}

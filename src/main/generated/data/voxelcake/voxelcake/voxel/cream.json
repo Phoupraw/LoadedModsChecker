@@ -1,0 +1,10 @@
+{
+  "type": "voxelcake:direct_block",
+  "blockState": {
+    "Name": "voxelcake:cream"
+  },
+  "foodComponent": {
+    "nutrition": 10,
+    "saturation": 15.0
+  }
+}
