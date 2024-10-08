@@ -2,7 +2,6 @@ package phoupraw.mcmod.loadedmodschecker.misc;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
-import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -198,4 +197,5 @@ public interface FabricUtils {
         }
         return parts.isEmpty() ? null : new CombinedStorage<>(parts);
     }
+    
 }
