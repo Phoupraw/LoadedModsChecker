@@ -1,0 +1,8 @@
+<root>
+    <item name='net.minecraft.data.server.recipe.RecipeProvider void offerMultipleOptions(net.minecraft.data.server.recipe.RecipeExporter, net.minecraft.recipe.RecipeSerializer&lt;T&gt;, net.minecraft.recipe.AbstractCookingRecipe.RecipeFactory&lt;T&gt;, java.util.List&lt;net.minecraft.item.ItemConvertible&gt;, net.minecraft.recipe.book.RecipeCategory, net.minecraft.item.ItemConvertible, float, int, java.lang.String, java.lang.String) 8'>
+        <annotation name='org.jetbrains.annotations.Nullable'/>
+    </item>
+    <item name='net.minecraft.data.server.recipe.RecipeProvider void offerSmelting(net.minecraft.data.server.recipe.RecipeExporter, java.util.List&lt;net.minecraft.item.ItemConvertible&gt;, net.minecraft.recipe.book.RecipeCategory, net.minecraft.item.ItemConvertible, float, int, java.lang.String) 6'>
+        <annotation name='org.jetbrains.annotations.Nullable'/>
+    </item>
+</root>

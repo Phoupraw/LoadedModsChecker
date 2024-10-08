@@ -1,0 +1,7 @@
+<root>
+    <item name='it.unimi.dsi.fastutil.objects.Reference2ObjectMap V getOrDefault(java.lang.Object, V)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+</root>

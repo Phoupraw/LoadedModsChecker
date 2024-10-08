@@ -1,0 +1,7 @@
+<root>
+    <item name='net.minecraft.block.AbstractBlock.AbstractBlockState net.minecraft.block.Block getBlock()'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+</root>

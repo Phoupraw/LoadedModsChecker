@@ -1,0 +1,47 @@
+<root>
+    <item name='net.fabricmc.fabric.api.transfer.v1.item.ItemVariant boolean matches(net.minecraft.item.ItemStack)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+    <item name='net.fabricmc.fabric.api.transfer.v1.item.ItemVariant net.fabricmc.fabric.api.transfer.v1.item.ItemVariant blank()'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+    <item name='net.fabricmc.fabric.api.transfer.v1.item.ItemVariant net.fabricmc.fabric.api.transfer.v1.item.ItemVariant of(net.minecraft.item.ItemConvertible)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+    <item name='net.fabricmc.fabric.api.transfer.v1.item.ItemVariant net.fabricmc.fabric.api.transfer.v1.item.ItemVariant of(net.minecraft.item.ItemConvertible, net.minecraft.component.ComponentChanges)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+    <item name='net.fabricmc.fabric.api.transfer.v1.item.ItemVariant net.fabricmc.fabric.api.transfer.v1.item.ItemVariant of(net.minecraft.item.ItemStack)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+    <item name='net.fabricmc.fabric.api.transfer.v1.item.ItemVariant net.minecraft.item.Item getItem()'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+    <item name='net.fabricmc.fabric.api.transfer.v1.item.ItemVariant net.minecraft.item.ItemStack toStack()'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+    <item name='net.fabricmc.fabric.api.transfer.v1.item.ItemVariant net.minecraft.item.ItemStack toStack(int)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+    <item name='net.fabricmc.fabric.api.transfer.v1.item.ItemVariant net.minecraft.registry.entry.RegistryEntry&lt;net.minecraft.item.Item&gt; getRegistryEntry()'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+</root>

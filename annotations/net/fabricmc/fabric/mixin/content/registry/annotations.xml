@@ -1,0 +1,7 @@
+<root>
+    <item name='net.fabricmc.fabric.mixin.content.registry.AxeItemAccessor java.util.Map&lt;net.minecraft.block.Block,net.minecraft.block.Block&gt; getStrippedBlocks()'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val val="&quot;-&gt;!null&quot;"/>
+        </annotation>
+    </item>
+</root>
