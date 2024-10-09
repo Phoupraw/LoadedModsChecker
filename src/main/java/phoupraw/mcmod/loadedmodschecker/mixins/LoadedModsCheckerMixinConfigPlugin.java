@@ -1,9 +1,12 @@
 package phoupraw.mcmod.loadedmodschecker.mixins;
 
+import com.terraformersmc.modmenu.ModMenu;
+import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.Nullable;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+import phoupraw.mcmod.loadedmodschecker.LoadedModsChecker;
 
 import java.util.List;
 import java.util.Set;
@@ -19,6 +22,9 @@ public final class LoadedModsCheckerMixinConfigPlugin implements IMixinConfigPlu
     }
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.startsWith("phoupraw.mcmod."+ LoadedModsChecker.ID +".mixin." + ModMenu.MOD_ID)) {
+            return FabricLoader.getInstance().isModLoaded(ModMenu.MOD_ID);
+        }
         return true;
     }
     @Override

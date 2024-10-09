@@ -1,14 +1,13 @@
 package phoupraw.mcmod.loadedmodschecker.misc;
 
 import net.fabricmc.loader.api.Version;
-import net.minecraft.client.font.TextRenderer;
 import net.minecraft.text.Text;
 
 public class DeletedModEntry extends ModVersionEntry {
     private final String modId;
     private final Version version;
-    public DeletedModEntry(TextRenderer textRenderer, String modId, Version version) {
-        super(textRenderer);
+    public DeletedModEntry(CheckingListWidget parent, String modId, Version version) {
+        super(parent);
         this.modId = modId;
         this.version = version;
     }

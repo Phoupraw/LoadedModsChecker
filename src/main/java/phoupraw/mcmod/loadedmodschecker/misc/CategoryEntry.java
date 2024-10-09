@@ -1,6 +1,5 @@
 package phoupraw.mcmod.loadedmodschecker.misc;
 
-import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.Selectable;
@@ -11,8 +10,9 @@ import java.util.List;
 
 public class CategoryEntry extends CheckingListWidget.Entry {
     private final TextWidget textWidget;
-    public CategoryEntry(TextRenderer textRenderer, Text text) {
-        textWidget = new TextWidget(text, textRenderer);
+    public CategoryEntry(CheckingListWidget parent, Text text) {
+        super(parent);
+        textWidget = new TextWidget(text, parent.getClient().textRenderer);
     }
     @Override
     public List<? extends Selectable> selectableChildren() {

@@ -12,7 +12,6 @@ import phoupraw.mcmod.loadedmodschecker.mixin.minecraft.AWrapperWidget;
 import java.util.Arrays;
 import java.util.List;
 
-//TODO 滚动条
 @Environment(EnvType.CLIENT)
 public class CheckingScreen extends Screen {
     //@ApiStatus.Obsolete
@@ -53,7 +52,7 @@ public class CheckingScreen extends Screen {
         rootLayout.addHeader(getTitle(), textRenderer);
         //ScrollableTextWidget body = new ScrollableTextWidget(0, 0, width, 100, bodyText, textRenderer);
         //rootLayout.addBody(body);
-        bodyWidget = new CheckingListWidget(client, width, rootLayout.getContentHeight(), rootLayout.getHeaderHeight(), 20,modsChanges);
+        bodyWidget = new CheckingListWidget(client, width, rootLayout.getContentHeight(), rootLayout.getHeaderHeight(), 20,modsChanges,this);
         rootLayout.addBody(bodyWidget);
         //addDrawableChild(body);
         ButtonWidget continueButton = ButtonWidget.builder(Text.translatable("gui.continue"), button -> onContinue.run()).build();
@@ -83,10 +82,6 @@ public class CheckingScreen extends Screen {
     @Override
     protected void initTabNavigation() {
         rootLayout.refreshPositions();
-    }
-    @Override
-    public boolean shouldCloseOnEsc() {
-        return true;
     }
     @SuppressWarnings("unchecked")
     public <T extends AxisGridWidget & AWrapperWidget> T getFootLayout() {
