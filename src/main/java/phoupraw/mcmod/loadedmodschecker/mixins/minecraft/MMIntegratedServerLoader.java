@@ -148,7 +148,7 @@ public interface MMIntegratedServerLoader {
             Screen[] checkingScreen = new Screen[1];
             checkingScreen[0] = new CheckingScreen(title, messeges, ImmutableList.of(
               new DialogScreen.ChoiceButton(Text.translatable("gui.continue"), button -> {
-                  checkingScreen[0].close();
+                  //checkingScreen[0].close();
                   saveMods(session, levelProperties, safeMode, onCancel, original, path, loadedMods);
               }),
               new DialogScreen.ChoiceButton(Text.translatable("chat.copy"), button -> {
@@ -156,10 +156,12 @@ public interface MMIntegratedServerLoader {
               }),
               new DialogScreen.ChoiceButton(Text.translatable("gui.back"), button -> {
                   checkingScreen[0].close();
-                  session.tryClose();
-                  onCancel.run();
+                  //onClose.run();
               })
-            ), client.currentScreen);
+            ), () -> {
+                session.tryClose();
+                onCancel.run();
+            });
             client.setScreen(checkingScreen[0]);
         } else {
             saveMods(session, levelProperties, safeMode, onCancel, original, path, loadedMods);
