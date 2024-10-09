@@ -5,12 +5,16 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 import com.terraformersmc.modmenu.config.ModMenuConfig;
 import com.terraformersmc.modmenu.gui.ModsScreen;
 import com.terraformersmc.modmenu.gui.widget.entries.ModListEntry;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.Version;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import phoupraw.mcmod.loadedmodschecker.mixin.modmenu.AModsScreen;
-
+@Environment(EnvType.CLIENT)
 public class NewModEntry extends ModVersionEntry {
     private final ModContainer modContainer;
     public NewModEntry(CheckingListWidget parent, ModContainer modContainer) {
@@ -37,29 +41,29 @@ public class NewModEntry extends ModVersionEntry {
     public String getModId() {
         return modContainer.getMetadata().getId();
     }
+    private static void jumpToModMenu(MinecraftClient client, Screen parent, String modId) {
+        var modsScreen = (ModsScreen & AModsScreen) ModMenuApi.createModsScreen(parent);
+        client.setScreen(modsScreen);
+        if (!selectMod(modsScreen, modId) && !ModMenuConfig.SHOW_LIBRARIES.getValue()) {
+            modsScreen.getLibrariesButton().onClick(0, 0);
+            selectMod(modsScreen, modId);
+        }
+    }
+    private static boolean selectMod(Screen modsScreen0, String modId) {
+        var modsScreen = (ModsScreen & AModsScreen) modsScreen0;
+        for (ModListEntry child : modsScreen.getModList().children()) {
+            if (child.mod.getId().equals(modId)) {
+                modsScreen.getModList().select(child);
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         super.mouseClicked(mouseX, mouseY, button);
         if (FabricLoader.getInstance().isModLoaded(ModMenu.MOD_ID)) {
-            var modsScreen = (ModsScreen & AModsScreen) ModMenuApi.createModsScreen(parent.getParent());
-            parent.getClient().setScreen(modsScreen);
-            boolean found = false;
-            for (ModListEntry child : modsScreen.getModList().children()) {
-                if (child.mod.getId().equals(getModId())) {
-                    modsScreen.getModList().select(child);
-                    found = true;
-                    break;
-                }
-            }
-            if (!found && !ModMenuConfig.SHOW_LIBRARIES.getValue()) {
-                modsScreen.getLibrariesButton().onClick(mouseX,mouseY);
-                for (ModListEntry child : modsScreen.getModList().children()) {
-                    if (child.mod.getId().equals(getModId())) {
-                        modsScreen.getModList().select(child);
-                        break;
-                    }
-                }
-            }
+            jumpToModMenu(parent.getClient(), parent.getParent(), getModId());
         }
         return true;
     }

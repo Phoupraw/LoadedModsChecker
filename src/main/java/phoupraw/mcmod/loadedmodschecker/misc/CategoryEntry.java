@@ -1,5 +1,7 @@
 package phoupraw.mcmod.loadedmodschecker.misc;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.Selectable;
@@ -7,7 +9,7 @@ import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.text.Text;
 
 import java.util.List;
-
+@Environment(EnvType.CLIENT)
 public class CategoryEntry extends CheckingListWidget.Entry {
     private final TextWidget textWidget;
     public CategoryEntry(CheckingListWidget parent, Text text) {

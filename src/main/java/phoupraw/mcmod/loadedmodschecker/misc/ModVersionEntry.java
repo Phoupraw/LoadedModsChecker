@@ -1,14 +1,17 @@
 package phoupraw.mcmod.loadedmodschecker.misc;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.Version;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.Selectable;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 import java.util.List;
-
+@Environment(EnvType.CLIENT)
 public abstract class ModVersionEntry extends CheckingListWidget.Entry {
     //protected final TextRenderer textRenderer;
     public ModVersionEntry(CheckingListWidget parent) {
@@ -37,6 +40,9 @@ public abstract class ModVersionEntry extends CheckingListWidget.Entry {
         int gap = textRenderer.fontHeight + 1;
         context.drawText(textRenderer, modName, x + entryWidth / 2 - gap / 2 - textRenderer.getWidth(modName), y, -1, false);
         context.drawText(textRenderer, versionText, x + entryWidth / 2 + gap / 2, y, -1, false);
+        if (isMouseOver(mouseX,mouseY)) {
+            context.drawTooltip(textRenderer,Text.literal(getModId()).formatted(Formatting.GRAY),mouseX,mouseY);
+        }
     }
     @Override
     public void drawBorder(DrawContext context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
