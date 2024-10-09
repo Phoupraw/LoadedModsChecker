@@ -1,6 +1,5 @@
 package phoupraw.mcmod.loadedmodschecker.mixins.minecraft;
 
-import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
@@ -15,8 +14,6 @@ import net.fabricmc.loader.api.Version;
 import net.fabricmc.loader.api.VersionParsingException;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.DialogScreen;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -28,6 +25,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import phoupraw.mcmod.loadedmodschecker.misc.CheckingScreen;
 import phoupraw.mcmod.loadedmodschecker.misc.JavaUtils;
+import phoupraw.mcmod.loadedmodschecker.misc.ModsChanges;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -145,8 +143,8 @@ public interface MMIntegratedServerLoader {
                 }
             }
             LOGGER.info(info);
-            Screen[] checkingScreen = new Screen[1];
-            checkingScreen[0] = new CheckingScreen(title, messeges, ImmutableList.of(
+            //Screen[] checkingScreen = new Screen[1];
+            CheckingScreen screen = new CheckingScreen(title, /* ImmutableList.of(
               new DialogScreen.ChoiceButton(Text.translatable("gui.continue"), button -> {
                   //checkingScreen[0].close();
                   saveMods(session, levelProperties, safeMode, onCancel, original, path, loadedMods);
@@ -158,11 +156,21 @@ public interface MMIntegratedServerLoader {
                   checkingScreen[0].close();
                   //onClose.run();
               })
-            ), () -> {
+            ),*/ () -> {
                 session.tryClose();
                 onCancel.run();
-            });
-            client.setScreen(checkingScreen[0]);
+            }, info.toString(), () -> saveMods(session, levelProperties, safeMode, onCancel, original, path, loadedMods),new ModsChanges(newMods.keySet(),deletedMods,Map.of(),Map.of()));//TODO
+            //checkingScreen[0] = screen;
+            //client.setScreen(checkingScreen[0]);
+            client.setScreen(screen);
+            //screen.getBodyWidget().addEntry(new CheckingListWidget.CategoryEntry(client.textRenderer,Text.translatable(NEW).formatted(Formatting.AQUA)));
+            //for (String modId : newMods.keySet()) {
+            //    screen.getBodyWidget().addEntry(new CheckingListWidget.NewEntry(client.textRenderer,FabricLoader.getInstance().getModContainer(modId).orElseThrow()));
+            //}
+            //screen.getBodyWidget().addEntry(new CheckingListWidget.CategoryEntry(client.textRenderer,Text.translatable(DELETED).formatted(Formatting.AQUA)));
+            //for (String modId : deletedMods.keySet()) {
+            //    screen.getBodyWidget().addEntry(new CheckingListWidget.NewEntry(client.textRenderer,FabricLoader.getInstance().getModContainer(modId).orElseThrow()));
+            //}
         } else {
             saveMods(session, levelProperties, safeMode, onCancel, original, path, loadedMods);
         }
@@ -227,8 +235,8 @@ public interface MMIntegratedServerLoader {
         return lastLoadedMods;
     }
     private static void saveMods(LevelStorage.Session session, Dynamic<?> levelProperties, boolean safeMode, Runnable onCancel, Operation<Void> original, Path path, Map<String, Version> loadedMods) {
-        write(path, loadedMods);
         original.call(session, levelProperties, safeMode, onCancel);
+        write(path, loadedMods);
     }
     private static void write(Path path, Map<String, Version> loadedMods) {
         try {

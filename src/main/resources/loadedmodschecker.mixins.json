@@ -7,7 +7,7 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "client": ["minecraft.MIntegratedServerLoader"],
+  "client": ["minecraft.AWrapperWidget", "minecraft.MIntegratedServerLoader"],
   "plugin": "phoupraw.mcmod.loadedmodschecker.mixins.LoadedModsCheckerMixinConfigPlugin",
   "priority": 10000
 }

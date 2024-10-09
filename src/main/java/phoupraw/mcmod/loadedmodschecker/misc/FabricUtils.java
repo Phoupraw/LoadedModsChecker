@@ -21,6 +21,9 @@ import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.CombinedStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -28,6 +31,8 @@ import net.minecraft.client.render.model.BakedQuadFactory;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.text.Text;
+import net.minecraft.util.Language;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.tuple.Triple;
@@ -37,6 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FabricUtils {
     @Environment(EnvType.CLIENT)
@@ -197,5 +203,17 @@ public interface FabricUtils {
         }
         return parts.isEmpty() ? null : new CombinedStorage<>(parts);
     }
-    
+    static Text getModName(String modId) {
+        String i18nKey = "modmenu.nameTranslation." + modId;
+        if (Language.getInstance().hasTranslation(i18nKey)) {
+            return Text.translatable(i18nKey);
+        }
+        Optional<ModContainer> modContainer0 = FabricLoader.getInstance().getModContainer(modId);
+        if (modContainer0.isEmpty()) {
+            return Text.of(modId);
+        }
+        ModContainer modContainer = modContainer0.get();
+        ModMetadata metadata = modContainer.getMetadata();
+        return Text.of(metadata.getName());
+    }
 }

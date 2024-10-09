@@ -18,8 +18,7 @@
   },
   "environment": "*",
   "depends": {
-    "fabricloader": "*",
-    "fabric-api": "*"
+    "fabricloader": "*"
   },
   "mixins": ["loadedmodschecker.mixins.json"],
   "icon": "assets/loadedmodschecker/icon.png",
