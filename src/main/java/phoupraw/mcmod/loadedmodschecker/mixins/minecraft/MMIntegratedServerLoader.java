@@ -7,13 +7,13 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.mojang.serialization.Dynamic;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.Version;
 import net.fabricmc.loader.api.VersionParsingException;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -32,7 +32,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.StringJoiner;
@@ -85,100 +84,86 @@ public interface MMIntegratedServerLoader {
                 break check;
             }
             Text title = Text.translatable(TITLE, session.getDirectoryName());
-            List<Text> messeges = new ObjectArrayList<>();
+            //List<Text> messeges = new ObjectArrayList<>();
             var info = new StringJoiner(System.lineSeparator());
             info.add(title.getString());
             if (!newMods.isEmpty()) {
-                messeges.add(Text.translatable(NEW).formatted(Formatting.AQUA));
+                //messeges.add(Text.translatable(NEW).formatted(Formatting.AQUA));
                 info.add(Text.translatable(NEW).getString());
                 for (Map.Entry<String, Version> entry : newMods.entrySet()) {
                     String modId = entry.getKey();
                     String version = entry.getValue().getFriendlyString();
-                    messeges.add(Text.empty()
-                      .append(getModName(modId))
-                      .append(Text.literal(" : ").formatted(Formatting.DARK_GRAY))
-                      .append(version));
+                    //messeges.add(Text.empty()
+                    //  .append(getModName(modId))
+                    //  .append(Text.literal(" : ").formatted(Formatting.DARK_GRAY))
+                    //  .append(version));
                     info.add(modId + " " + version);
                 }
             }
             if (!deletedMods.isEmpty()) {
-                messeges.add(Text.translatable(DELETED).formatted(Formatting.RED));
+                //messeges.add(Text.translatable(DELETED).formatted(Formatting.RED));
                 info.add(Text.translatable(DELETED).getString());
                 for (Map.Entry<String, Version> entry : deletedMods.entrySet()) {
                     String modId = entry.getKey();
                     String version = entry.getValue().getFriendlyString();
-                    messeges.add(Text.empty()
-                      .append(getModName(modId))
-                      .append(Text.literal(" : ").formatted(Formatting.DARK_GRAY))
-                      .append(version));
+                    //messeges.add(Text.empty()
+                    //  .append(getModName(modId))
+                    //  .append(Text.literal(" : ").formatted(Formatting.DARK_GRAY))
+                    //  .append(version));
                     info.add(modId + " " + version);
                 }
             }
             if (!updatedMods.isEmpty()) {
-                messeges.add(Text.translatable(UPDATED).formatted(Formatting.GREEN));
+                //messeges.add(Text.translatable(UPDATED).formatted(Formatting.GREEN));
                 info.add(Text.translatable(UPDATED).getString());
                 for (var entry : updatedMods.entrySet()) {
                     Pair<Version, Version> pair = entry.getValue();
                     String modId = entry.getKey();
                     String versionPair = pair.left().getFriendlyString() + " -> " + pair.right().getFriendlyString();
-                    messeges.add(Text.empty()
-                      .append(getModName(modId))
-                      .append(Text.literal(" : ").formatted(Formatting.DARK_GRAY))
-                      .append(versionPair));
+                    //messeges.add(Text.empty()
+                    //  .append(getModName(modId))
+                    //  .append(Text.literal(" : ").formatted(Formatting.DARK_GRAY))
+                    //  .append(versionPair));
                     info.add(modId + " " + versionPair);
                 }
             }
             if (!rollbackedMods.isEmpty()) {
-                messeges.add(Text.translatable(ROLLBACKED).formatted(Formatting.GOLD));
+                //messeges.add(Text.translatable(ROLLBACKED).formatted(Formatting.GOLD));
                 info.add(Text.translatable(ROLLBACKED).getString());
                 for (var entry : rollbackedMods.entrySet()) {
                     Pair<Version, Version> pair = entry.getValue();
                     String modId = entry.getKey();
                     String versionPair = pair.left().getFriendlyString() + " -> " + pair.right().getFriendlyString();
-                    messeges.add(Text.empty()
-                      .append(getModName(modId))
-                      .append(Text.literal(" : ").formatted(Formatting.DARK_GRAY))
-                      .append(versionPair));
+                    //messeges.add(Text.empty()
+                    //  .append(getModName(modId))
+                    //  .append(Text.literal(" : ").formatted(Formatting.DARK_GRAY))
+                    //  .append(versionPair));
                     info.add(modId + " " + versionPair);
                 }
             }
             LOGGER.info(info);
-            //Screen[] checkingScreen = new Screen[1];
-            Map<String,Version> updatedMods1 = new Object2ObjectLinkedOpenHashMap<>();
+            Map<String, Version> updatedMods1 = new Object2ObjectLinkedOpenHashMap<>();
             for (var entry : updatedMods.entrySet()) {
-                updatedMods1.put(entry.getKey(),entry.getValue().left());
+                updatedMods1.put(entry.getKey(), entry.getValue().left());
             }
-            Map<String,Version> rollbackedMods1 = new Object2ObjectLinkedOpenHashMap<>();
+            Map<String, Version> rollbackedMods1 = new Object2ObjectLinkedOpenHashMap<>();
             for (var entry : rollbackedMods.entrySet()) {
-                rollbackedMods1.put(entry.getKey(),entry.getValue().left());
+                rollbackedMods1.put(entry.getKey(), entry.getValue().left());
             }
-            CheckingScreen screen = new CheckingScreen(title, /* ImmutableList.of(
-              new DialogScreen.ChoiceButton(Text.translatable("gui.continue"), button -> {
-                  //checkingScreen[0].close();
-                  saveMods(session, levelProperties, safeMode, onCancel, original, path, loadedMods);
-              }),
-              new DialogScreen.ChoiceButton(Text.translatable("chat.copy"), button -> {
-                  client.keyboard.setClipboard(info.toString());
-              }),
-              new DialogScreen.ChoiceButton(Text.translatable("gui.back"), button -> {
-                  checkingScreen[0].close();
-                  //onClose.run();
-              })
-            ),*/ () -> {
-                session.tryClose();
-                onCancel.run();
-            }, info.toString(), () -> saveMods(session, levelProperties, safeMode, onCancel, original, path, loadedMods), new ModsChanges(newMods.keySet(), deletedMods, updatedMods1, rollbackedMods1));
-            //checkingScreen[0] = screen;
-            //client.setScreen(checkingScreen[0]);
+            CheckingScreen screen = new CheckingScreen(title, info.toString(), new ModsChanges(newMods.keySet(), deletedMods, updatedMods1, rollbackedMods1)) {
+                @Override
+                public void close() {
+                    super.close();
+                    session.tryClose();
+                    onCancel.run();
+                }
+                @Override
+                protected void onClickContinue(ButtonWidget button) {
+                    super.onClickContinue(button);
+                    saveMods(session, levelProperties, safeMode, onCancel, original, path, loadedMods);
+                }
+            };
             client.setScreen(screen);
-            //screen.getBodyWidget().addEntry(new CheckingListWidget.CategoryEntry(client.textRenderer,Text.translatable(NEW).formatted(Formatting.AQUA)));
-            //for (String modId : newMods.keySet()) {
-            //    screen.getBodyWidget().addEntry(new CheckingListWidget.NewEntry(client.textRenderer,FabricLoader.getInstance().getModContainer(modId).orElseThrow()));
-            //}
-            //screen.getBodyWidget().addEntry(new CheckingListWidget.CategoryEntry(client.textRenderer,Text.translatable(DELETED).formatted(Formatting.AQUA)));
-            //for (String modId : deletedMods.keySet()) {
-            //    screen.getBodyWidget().addEntry(new CheckingListWidget.NewEntry(client.textRenderer,FabricLoader.getInstance().getModContainer(modId).orElseThrow()));
-            //}
         } else {
             saveMods(session, levelProperties, safeMode, onCancel, original, path, loadedMods);
         }

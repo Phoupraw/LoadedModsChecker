@@ -7,6 +7,7 @@ import net.minecraft.client.gui.widget.AxisGridWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ThreePartsLayoutWidget;
 import net.minecraft.text.Text;
+import org.jetbrains.annotations.ApiStatus;
 import phoupraw.mcmod.loadedmodschecker.mixin.minecraft.AWrapperWidget;
 
 import java.util.Arrays;
@@ -16,19 +17,15 @@ import java.util.List;
 public class CheckingScreen extends Screen {
     //@ApiStatus.Obsolete
     //private final @Nullable Screen parent;
-    private final Runnable onClose;
     //this.parent = parent;
     private final ThreePartsLayoutWidget rootLayout = new ThreePartsLayoutWidget(this);
     private final String info;
-    private final Runnable onContinue;
     private final ModsChanges modsChanges;
     private AxisGridWidget footLayout;
     private CheckingListWidget bodyWidget;
-    public CheckingScreen(Text title,   /*@Nullable Screen parent,*/Runnable onClose, String info, Runnable onContinue, ModsChanges modsChanges) {
+    public CheckingScreen(Text title, String info, ModsChanges modsChanges) {
         super(title);
-        this.onClose = onClose;
         this.info = info;
-        this.onContinue = onContinue;
         this.modsChanges = modsChanges;
         //var bodyText = Text.empty();
         //for (Iterator<Text> iterator = lines.iterator(); iterator.hasNext(); ) {
@@ -41,7 +38,7 @@ public class CheckingScreen extends Screen {
     }
     @Override
     public void close() {
-        onClose.run();
+        //onClose.run();
         //if (client!=null&&parent!=null) {
         //    client.setScreen(parent);
         //}
@@ -52,16 +49,16 @@ public class CheckingScreen extends Screen {
         rootLayout.addHeader(getTitle(), textRenderer);
         //ScrollableTextWidget body = new ScrollableTextWidget(0, 0, width, 100, bodyText, textRenderer);
         //rootLayout.addBody(body);
-        bodyWidget = new CheckingListWidget(client, width, rootLayout.getContentHeight(), rootLayout.getHeaderHeight(), 20,modsChanges,this);
+        bodyWidget = new CheckingListWidget(client, width, rootLayout.getContentHeight(), rootLayout.getHeaderHeight(), textRenderer.fontHeight + 4, modsChanges, this);
         rootLayout.addBody(bodyWidget);
         //addDrawableChild(body);
-        ButtonWidget continueButton = ButtonWidget.builder(Text.translatable("gui.continue"), button -> onContinue.run()).build();
+        ButtonWidget continueButton = ButtonWidget.builder(Text.translatable("gui.continue"), this::onClickContinue).build();
         //rootLayout.addFooter(continueButton);
         //addDrawableChild(continueButton);
-        ButtonWidget copyButton = ButtonWidget.builder(Text.translatable("chat.copy"), button -> client.keyboard.setClipboard(info)).build();
+        ButtonWidget copyButton = ButtonWidget.builder(Text.translatable("chat.copy"), this::onClickCopy).build();
         //rootLayout.addFooter(copyButton);
         //addDrawableChild(copyButton);
-        ButtonWidget backButton = ButtonWidget.builder(Text.translatable("gui.back"), button -> close()).build();
+        ButtonWidget backButton = ButtonWidget.builder(Text.translatable("gui.back"), this::onClickBack).build();
         //rootLayout.addFooter(backButton);
         List<ButtonWidget> footButtons = Arrays.asList(continueButton, copyButton, backButton);
         int maxButtonWidth = 0;
@@ -89,5 +86,17 @@ public class CheckingScreen extends Screen {
     }
     public CheckingListWidget getBodyWidget() {
         return bodyWidget;
+    }
+    @ApiStatus.OverrideOnly
+    protected void onClickContinue(ButtonWidget button) {
+    
+    }
+    @ApiStatus.OverrideOnly
+    private void onClickBack(ButtonWidget button) {
+        close();
+    }
+    @ApiStatus.OverrideOnly
+    private void onClickCopy(ButtonWidget button) {
+        client.keyboard.setClipboard(info);
     }
 }

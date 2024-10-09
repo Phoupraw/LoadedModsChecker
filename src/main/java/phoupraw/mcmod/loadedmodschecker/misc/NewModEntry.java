@@ -87,7 +87,7 @@ public class NewModEntry extends ModVersionEntry {
             List<Text > tooltip = new ObjectArrayList<>(2);
             tooltip.add(Text.literal(getModId()).formatted(Formatting.GRAY));
             if (FabricLoader.getInstance().isModLoaded(ModMenu.MOD_ID)) {
-                tooltip.add(Text.translatable(MODMENU).formatted(Formatting.GRAY,Formatting.UNDERLINE));
+                tooltip.add(Text.translatable(MODMENU).formatted(Formatting.GRAY,Formatting.ITALIC));
             }
             context.drawTooltip(parent.getClient().textRenderer, tooltip,mouseX,mouseY);
         }
