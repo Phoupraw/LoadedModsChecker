@@ -18,7 +18,7 @@ public class CategoryEntry extends CheckingListWidget.Entry {
     }
     @Override
     public List<? extends Selectable> selectableChildren() {
-        return List.of();
+        return super.selectableChildren();
     }
     @Override
     public List<? extends Element> children() {

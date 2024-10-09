@@ -7,7 +7,13 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "client": ["minecraft.AWrapperWidget", "minecraft.MIntegratedServerLoader", "modmenu.AModsScreen"],
+  "client": [
+    "minecraft.AEntryListWidget",
+    "minecraft.AWrapperWidget",
+    "minecraft.MIntegratedServerLoader",
+    "modmenu.AModListWidget",
+    "modmenu.AModsScreen"
+  ],
   "plugin": "phoupraw.mcmod.loadedmodschecker.mixins.LoadedModsCheckerMixinConfigPlugin",
   "priority": 10000
 }

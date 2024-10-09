@@ -1,5 +1,6 @@
 {
   "gui.loadedmodschecker.deleted": "移除：",
+  "gui.loadedmodschecker.modmenu": "点击跳转到模组菜单",
   "gui.loadedmodschecker.new": "新增：",
   "gui.loadedmodschecker.rollbacked": "回退：",
   "gui.loadedmodschecker.title": "当前加载的模组与上次进入《%s》时的有所不同",

@@ -144,6 +144,14 @@ public interface MMIntegratedServerLoader {
             }
             LOGGER.info(info);
             //Screen[] checkingScreen = new Screen[1];
+            Map<String,Version> updatedMods1 = new Object2ObjectLinkedOpenHashMap<>();
+            for (var entry : updatedMods.entrySet()) {
+                updatedMods1.put(entry.getKey(),entry.getValue().left());
+            }
+            Map<String,Version> rollbackedMods1 = new Object2ObjectLinkedOpenHashMap<>();
+            for (var entry : rollbackedMods.entrySet()) {
+                rollbackedMods1.put(entry.getKey(),entry.getValue().left());
+            }
             CheckingScreen screen = new CheckingScreen(title, /* ImmutableList.of(
               new DialogScreen.ChoiceButton(Text.translatable("gui.continue"), button -> {
                   //checkingScreen[0].close();
@@ -159,7 +167,7 @@ public interface MMIntegratedServerLoader {
             ),*/ () -> {
                 session.tryClose();
                 onCancel.run();
-            }, info.toString(), () -> saveMods(session, levelProperties, safeMode, onCancel, original, path, loadedMods),new ModsChanges(newMods.keySet(),deletedMods,Map.of(),Map.of()));//TODO
+            }, info.toString(), () -> saveMods(session, levelProperties, safeMode, onCancel, original, path, loadedMods), new ModsChanges(newMods.keySet(), deletedMods, updatedMods1, rollbackedMods1));
             //checkingScreen[0] = screen;
             //client.setScreen(checkingScreen[0]);
             client.setScreen(screen);
@@ -236,7 +244,7 @@ public interface MMIntegratedServerLoader {
     }
     private static void saveMods(LevelStorage.Session session, Dynamic<?> levelProperties, boolean safeMode, Runnable onCancel, Operation<Void> original, Path path, Map<String, Version> loadedMods) {
         original.call(session, levelProperties, safeMode, onCancel);
-        write(path, loadedMods);
+        new Thread(() -> write(path, loadedMods)).start();
     }
     private static void write(Path path, Map<String, Version> loadedMods) {
         try {

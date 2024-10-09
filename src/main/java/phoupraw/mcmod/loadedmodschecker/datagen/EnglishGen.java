@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
 import phoupraw.mcmod.loadedmodschecker.LoadedModsChecker;
+import phoupraw.mcmod.loadedmodschecker.misc.NewModEntry;
 import phoupraw.mcmod.loadedmodschecker.mixins.minecraft.MMIntegratedServerLoader;
 
 import java.util.concurrent.CompletableFuture;
@@ -27,5 +28,6 @@ final class EnglishGen extends FabricLanguageProvider {
         b.add(MMIntegratedServerLoader.DELETED, "Deleted:");
         b.add(MMIntegratedServerLoader.UPDATED, "Updated:");
         b.add(MMIntegratedServerLoader.ROLLBACKED, "Rollbacked:");
+        b.add(NewModEntry.MODMENU,"Click to jump to Mod Menu");
     }
 }

@@ -1,5 +1,6 @@
 {
   "gui.loadedmodschecker.deleted": "Deleted:",
+  "gui.loadedmodschecker.modmenu": "Click to jump to Mod Menu",
   "gui.loadedmodschecker.new": "New:",
   "gui.loadedmodschecker.rollbacked": "Rollbacked:",
   "gui.loadedmodschecker.title": "The currently loaded mods are different from the last time enter §o%s§r",

@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
 import phoupraw.mcmod.loadedmodschecker.LoadedModsChecker;
+import phoupraw.mcmod.loadedmodschecker.misc.NewModEntry;
 import phoupraw.mcmod.loadedmodschecker.mixins.minecraft.MMIntegratedServerLoader;
 
 import java.util.concurrent.CompletableFuture;
@@ -27,5 +28,6 @@ final class ChineseGen extends FabricLanguageProvider {
         b.add(MMIntegratedServerLoader.DELETED, "移除：");
         b.add(MMIntegratedServerLoader.UPDATED, "更新：");
         b.add(MMIntegratedServerLoader.ROLLBACKED, "回退：");
+        b.add(NewModEntry.MODMENU,"点击跳转到模组菜单");
     }
 }
