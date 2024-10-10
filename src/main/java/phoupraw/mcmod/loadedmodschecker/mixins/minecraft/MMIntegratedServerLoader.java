@@ -197,6 +197,7 @@ public interface MMIntegratedServerLoader {
         return lastLoadedMods;
     }
     private static void saveMods(LevelStorage.Session session, Dynamic<?> levelProperties, boolean safeMode, Runnable onCancel, Operation<Void> original, Path path, Map<String, Version> loadedMods) {
+        //FIXME 为什么有时候在点击继续后会无响应不到一秒？
         original.call(session, levelProperties, safeMode, onCancel);
         new Thread(() -> write(path, loadedMods)).start();
     }
