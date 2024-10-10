@@ -28,40 +28,15 @@ import static phoupraw.mcmod.loadedmodschecker.LoadedModsChecker.LOGGER;
 @Environment(EnvType.CLIENT)
 public class NewModEntry extends ModVersionEntry {
     public static final String MODMENU = "gui." + ID + ".modmenu";
-    private final ModContainer modContainer;
-    public NewModEntry(CheckingListWidget parent, ModContainer modContainer) {
-        super(parent);
-        this.modContainer = modContainer;
-    }
-    @Override
-    public Version getVersion() {
-        return modContainer.getMetadata().getVersion();
-    }
-    //@Override
-    //public void render(DrawContext context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
-    //    ModMetadata metadata = modContainer.getMetadata();
-    //    Text modName = FabricUtils.getModName(metadata.getId());
-    //    var versionText = Text.literal(metadata.getVersion().getFriendlyString());
-    //    context.drawText(textRenderer, modName, x + entryWidth / 2 - textRenderer.getWidth(modName), y, -1, false);
-    //    context.drawText(textRenderer, versionText, x + entryWidth / 2, y, -1, false);
-    //}
-    @Override
-    public Text getModName() {
-        return FabricUtils.getModName(getModId());
-    }
-    @Override
-    public String getModId() {
-        return modContainer.getMetadata().getId();
-    }
     private static void jumpToModMenu(MinecraftClient client, Screen parent, String modId) {
-        try{
+        try {
             var modsScreen = (ModsScreen & AModsScreen) ModMenuApi.createModsScreen(parent);
             client.setScreen(modsScreen);
             if (!selectMod(modsScreen, modId) && !ModMenuConfig.SHOW_LIBRARIES.getValue()) {
                 modsScreen.getLibrariesButton().onClick(0, 0);
                 selectMod(modsScreen, modId);
             }
-        }catch (Throwable e) {
+        } catch (Throwable e) {
             LOGGER.throwing(e);
         }
     }
@@ -77,6 +52,15 @@ public class NewModEntry extends ModVersionEntry {
         }
         return false;
     }
+    private final ModContainer modContainer;
+    public NewModEntry(CheckingListWidget parent, ModContainer modContainer) {
+        super(parent);
+        this.modContainer = modContainer;
+    }
+    @Override
+    public Text getModName() {
+        return FabricUtils.getModName(getModId());
+    }
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         boolean r = super.mouseClicked(mouseX, mouseY, button);
@@ -89,6 +73,14 @@ public class NewModEntry extends ModVersionEntry {
             return true;
         }
         return r;
+    }
+    @Override
+    public Version getVersion() {
+        return modContainer.getMetadata().getVersion();
+    }
+    @Override
+    public String getModId() {
+        return modContainer.getMetadata().getId();
     }
     @MustBeInvokedByOverriders
     @Override

@@ -69,7 +69,7 @@ public interface FabricUtils {
     }
     static void set(List<Triple<FluidVariant, Long, Integer>> source, List<SingleVariantStorage<FluidVariant>> target) {
         for (SingleVariantStorage<FluidVariant> part : target) {
-            part.amount= 0 ;
+            part.amount = 0;
         }
         for (Triple<FluidVariant, Long, Integer> triple : source) {
             int index = triple.getRight();
@@ -191,18 +191,6 @@ public interface FabricUtils {
         }
         return true;
     }
-    
-    private static Storage<ItemVariant> find(World world, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, @Nullable Direction context) {
-        var providers = ITEM_STORAGE_SIDED_COMBINED_PROVIDERS.get(state.getBlock());
-        List<Storage<ItemVariant>> parts = new ObjectArrayList<>(providers.size());
-        for (var provider : providers) {
-            var part = provider.find(world, pos, state, blockEntity, context);
-            if (part != null) {
-                parts.add(part);
-            }
-        }
-        return parts.isEmpty() ? null : new CombinedStorage<>(parts);
-    }
     static Text getModName(String modId) {
         String i18nKey = "modmenu.nameTranslation." + modId;
         if (Language.getInstance().hasTranslation(i18nKey)) {
@@ -215,5 +203,16 @@ public interface FabricUtils {
         ModContainer modContainer = modContainer0.get();
         ModMetadata metadata = modContainer.getMetadata();
         return Text.of(metadata.getName());
+    }
+    private static Storage<ItemVariant> find(World world, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, @Nullable Direction context) {
+        var providers = ITEM_STORAGE_SIDED_COMBINED_PROVIDERS.get(state.getBlock());
+        List<Storage<ItemVariant>> parts = new ObjectArrayList<>(providers.size());
+        for (var provider : providers) {
+            var part = provider.find(world, pos, state, blockEntity, context);
+            if (part != null) {
+                parts.add(part);
+            }
+        }
+        return parts.isEmpty() ? null : new CombinedStorage<>(parts);
     }
 }

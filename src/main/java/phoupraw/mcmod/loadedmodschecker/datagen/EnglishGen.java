@@ -29,7 +29,7 @@ final class EnglishGen extends FabricLanguageProvider {
         b.add(MMIntegratedServerLoader.DELETED, "Deleted:");
         b.add(MMIntegratedServerLoader.UPDATED, "Updated:");
         b.add(MMIntegratedServerLoader.ROLLBACKED, "Rollbacked:");
-        b.add(NewModEntry.MODMENU,"Left click to jump to Mod Menu");
-        b.add(ModVersionEntry.COPY,"Right click to copy the id of the mod");
+        b.add(NewModEntry.MODMENU, "Left click to jump to Mod Menu");
+        b.add(ModVersionEntry.COPY, "Right click to copy the id of the mod");
     }
 }

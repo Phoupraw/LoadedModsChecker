@@ -7,6 +7,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import phoupraw.mcmod.loadedmodschecker.mixin.minecraft.AEntryListWidget;
 
 @Environment(EnvType.CLIENT)
-@Mixin(value = ModListWidget.class,remap = false)
+@Mixin(value = ModListWidget.class, remap = false)
 public interface AModListWidget extends AEntryListWidget {
 }

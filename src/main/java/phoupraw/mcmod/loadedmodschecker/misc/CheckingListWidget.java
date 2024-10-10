@@ -48,13 +48,13 @@ public class CheckingListWidget extends ElementListWidget<CheckingListWidget.Ent
         int rowWidth = 0;
         for (Entry child : children()) {
             child.init();
-            rowWidth = Math.max(rowWidth,child.getMinWidth());
+            rowWidth = Math.max(rowWidth, child.getMinWidth());
         }
-        this.rowWidth=rowWidth;
+        this.rowWidth = rowWidth;
     }
     @Override
     public int getRowWidth() {
-        return rowWidth;//getClient().textRenderer.getWidth("000000000011111111112222222222333333333344444444445555555555");
+        return rowWidth;
     }
     @Override
     protected boolean isSelectButton(int button) {

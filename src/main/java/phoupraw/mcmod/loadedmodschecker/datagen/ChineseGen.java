@@ -29,7 +29,7 @@ final class ChineseGen extends FabricLanguageProvider {
         b.add(MMIntegratedServerLoader.DELETED, "移除：");
         b.add(MMIntegratedServerLoader.UPDATED, "更新：");
         b.add(MMIntegratedServerLoader.ROLLBACKED, "回退：");
-        b.add(NewModEntry.MODMENU,"左键单击跳转到模组菜单");
-        b.add(ModVersionEntry.COPY,"右键单击复制模组ID");
+        b.add(NewModEntry.MODMENU, "左键单击跳转到模组菜单");
+        b.add(ModVersionEntry.COPY, "右键单击复制模组ID");
     }
 }

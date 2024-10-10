@@ -24,6 +24,10 @@ import java.util.List;
 public interface MCUtils {
     @Unmodifiable
     List<@NotNull Direction> DIRECTIONS = List.of(Direction.values());
+    Comparator<? super Vec3i> VEC3I_COMPARATOR = Comparator
+      .comparingInt(Vec3i::getY)
+      .thenComparingInt(Vec3i::getX)
+      .thenComparingInt(Vec3i::getZ);
     @Environment(EnvType.CLIENT)
     @Contract(pure = true)
     static Sprite getMissingSprite() {
@@ -66,8 +70,4 @@ public interface MCUtils {
     static boolean hasOpLevel(CommandSource source) {
         return source.hasPermissionLevel(2);
     }
-    Comparator<? super Vec3i> VEC3I_COMPARATOR = Comparator
-      .comparingInt(Vec3i::getY)
-      .thenComparingInt(Vec3i::getX)
-      .thenComparingInt(Vec3i::getZ);
 }

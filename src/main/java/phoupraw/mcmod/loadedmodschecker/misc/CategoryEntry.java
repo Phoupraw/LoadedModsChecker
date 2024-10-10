@@ -9,6 +9,7 @@ import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.text.Text;
 
 import java.util.List;
+
 @Environment(EnvType.CLIENT)
 public class CategoryEntry extends CheckingListWidget.Entry {
     private final TextWidget textWidget;
@@ -25,13 +26,13 @@ public class CategoryEntry extends CheckingListWidget.Entry {
         return List.of(textWidget);
     }
     @Override
+    protected int getMinWidth() {
+        return textWidget.getWidth();
+    }
+    @Override
     public void render(DrawContext context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
         textWidget.setX(x);
         textWidget.setY(y);
         textWidget.render(context, mouseX, mouseY, tickDelta);
-    }
-    @Override
-    protected int getMinWidth() {
-        return textWidget.getWidth();
     }
 }

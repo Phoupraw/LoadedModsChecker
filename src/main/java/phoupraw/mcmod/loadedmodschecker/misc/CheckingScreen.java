@@ -37,8 +37,7 @@ public class CheckingScreen extends Screen {
         for (ButtonWidget button : footButtons) {
             maxButtonWidth = Math.max(maxButtonWidth, textRenderer.getWidth(button.getMessage()) + 40);
         }
-        //var footLayout = new AxisGridWidget((maxButtonWidth + 10) * footButtons.size() - 10, height, AxisGridWidget.DisplayAxis.HORIZONTAL);
-        var footLayout = new DirectionalLayoutWidget(0,0, DirectionalLayoutWidget.DisplayAxis.HORIZONTAL).spacing(8);
+        var footLayout = new DirectionalLayoutWidget(0, 0, DirectionalLayoutWidget.DisplayAxis.HORIZONTAL).spacing(8);
         for (ButtonWidget button : footButtons) {
             button.setWidth(maxButtonWidth);
             footLayout.add(button);

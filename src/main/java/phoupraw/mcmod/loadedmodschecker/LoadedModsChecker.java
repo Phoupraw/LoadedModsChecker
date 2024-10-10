@@ -28,6 +28,6 @@ public final class LoadedModsChecker implements ModInitializer {
     
     @Override
     public void onInitialize() {
-
+    
     }
 }

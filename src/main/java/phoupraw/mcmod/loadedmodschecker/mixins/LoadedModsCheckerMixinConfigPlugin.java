@@ -22,7 +22,7 @@ public final class LoadedModsCheckerMixinConfigPlugin implements IMixinConfigPlu
     }
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.startsWith("phoupraw.mcmod."+ LoadedModsChecker.ID +".mixin." + ModMenu.MOD_ID)) {
+        if (mixinClassName.startsWith("phoupraw.mcmod." + LoadedModsChecker.ID + ".mixin." + ModMenu.MOD_ID)) {
             return FabricLoader.getInstance().isModLoaded(ModMenu.MOD_ID);
         }
         return true;
