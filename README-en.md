@@ -8,3 +8,5 @@
 Check if there are missing mods compared to the last time when entering a world
 
 Every time you enter a world, it will compare whether the currently loaded mods are consistent with the mods loaded the last time. If any inconsistency is detected, it will prompt which mods are inconsistent and allow you to return directly without loading the world.
+
+![截图](./gallery/english.png)
