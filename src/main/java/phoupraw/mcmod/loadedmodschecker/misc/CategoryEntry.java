@@ -30,4 +30,8 @@ public class CategoryEntry extends CheckingListWidget.Entry {
         textWidget.setY(y);
         textWidget.render(context, mouseX, mouseY, tickDelta);
     }
+    @Override
+    protected int getMinWidth() {
+        return textWidget.getWidth();
+    }
 }

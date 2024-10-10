@@ -20,11 +20,12 @@ public abstract class ModVersionEntry extends CheckingListWidget.Entry {
     public static final String COPY = "gui." + LoadedModsChecker.ID + ".copy";
     protected final TextWidget leftTextWidget;
     protected final TextWidget rightTextWidget;
+    //private int minWidth;
     //protected final TextRenderer textRenderer;
     public ModVersionEntry(CheckingListWidget parent) {
         super(parent);
-        leftTextWidget = new TextWidget(Text.empty(),parent.getClient().textRenderer);
-        rightTextWidget = new TextWidget(Text.empty(),parent.getClient().textRenderer);
+        leftTextWidget = new TextWidget(Text.empty(), parent.getClient().textRenderer);
+        rightTextWidget = new TextWidget(Text.empty(), parent.getClient().textRenderer);
         //this.textRenderer = parent.getClient().textRenderer;
     }
     @Override
@@ -36,10 +37,10 @@ public abstract class ModVersionEntry extends CheckingListWidget.Entry {
         int gap = textRenderer.fontHeight + 1;
         leftTextWidget.setX(x + entryWidth / 2 - gap / 2 - leftTextWidget.getWidth());
         leftTextWidget.setY(y);
-        leftTextWidget.render(context,mouseX,mouseY,tickDelta);
-        rightTextWidget.setX( x + entryWidth / 2 + gap / 2);
+        leftTextWidget.render(context, mouseX, mouseY, tickDelta);
+        rightTextWidget.setX(x + entryWidth / 2 + gap / 2);
         rightTextWidget.setY(y);
-        rightTextWidget.render(context,mouseX,mouseY,tickDelta);
+        rightTextWidget.render(context, mouseX, mouseY, tickDelta);
         //context.drawText(textRenderer, modName, x + entryWidth / 2 - gap / 2 - textRenderer.getWidth(modName), y, -1, false);
         //context.drawText(textRenderer, versionText, x + entryWidth / 2 + gap / 2, y, -1, false);
         if (isMouseOver(mouseX, mouseY)) {
@@ -61,6 +62,8 @@ public abstract class ModVersionEntry extends CheckingListWidget.Entry {
         TextRenderer textRenderer = parent.getClient().textRenderer;
         leftTextWidget.setWidth(textRenderer.getWidth(leftTextWidget.getMessage()));
         rightTextWidget.setWidth(textRenderer.getWidth(rightTextWidget.getMessage()));
+        int gap = textRenderer.fontHeight + 1;
+        //minWidth = leftTextWidget.getWidth() + gap + rightTextWidget.getWidth();
     }
     @Override
     public void drawBorder(DrawContext context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
@@ -103,4 +106,12 @@ public abstract class ModVersionEntry extends CheckingListWidget.Entry {
     //        parent.playDownSound(parent.getClient().getSoundManager());
     //    }
     //}
+    
+    @Override
+    public int getMinWidth() {
+        TextRenderer textRenderer = parent.getClient().textRenderer;
+        int gap = textRenderer.fontHeight + 1;
+        int textWidth = Math.max(leftTextWidget.getWidth(), rightTextWidget.getWidth());
+        return textWidth * 2 + gap * 2;
+    }
 }

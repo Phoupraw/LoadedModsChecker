@@ -17,6 +17,7 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 public class CheckingListWidget extends ElementListWidget<CheckingListWidget.Entry> {
     private final CheckingScreen parent;
+    private final int rowWidth;
     public CheckingListWidget(MinecraftClient client, int width, int height, int y, int itemHeight, ModsChanges modsChanges, CheckingScreen parent) {
         super(client, width, height, y, itemHeight);
         this.parent = parent;
@@ -44,13 +45,16 @@ public class CheckingListWidget extends ElementListWidget<CheckingListWidget.Ent
                 addEntry(new VersionPairEntry(this, FabricLoader.getInstance().getModContainer(entry.getKey()).orElseThrow(), entry.getValue()));
             }
         }
+        int rowWidth = 0;
         for (Entry child : children()) {
             child.init();
+            rowWidth = Math.max(rowWidth,child.getMinWidth());
         }
+        this.rowWidth=rowWidth;
     }
     @Override
     public int getRowWidth() {
-        return getClient().textRenderer.getWidth("000000000011111111112222222222333333333344444444445555555555");
+        return rowWidth;//getClient().textRenderer.getWidth("000000000011111111112222222222333333333344444444445555555555");
     }
     @Override
     protected boolean isSelectButton(int button) {
@@ -82,6 +86,12 @@ public class CheckingListWidget extends ElementListWidget<CheckingListWidget.Ent
         }
         protected void init() {
         
+        }
+        /**
+         @implNote 只会被调用一次，因此不必缓存结果。
+         */
+        protected int getMinWidth() {
+            return 0;
         }
     }
     
