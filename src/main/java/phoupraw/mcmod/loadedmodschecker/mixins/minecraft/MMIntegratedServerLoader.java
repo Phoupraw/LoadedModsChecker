@@ -61,7 +61,6 @@ public interface MMIntegratedServerLoader {
             Map<String, Version> deletedMods = new Object2ObjectLinkedOpenHashMap<>();
             Map<String, Pair<Version, Version>> updatedMods = new Object2ObjectLinkedOpenHashMap<>();
             Map<String, Pair<Version, Version>> rollbackedMods = new Object2ObjectLinkedOpenHashMap<>();
-            //Map<String, Pair<Version,Version>> versionlessMods = new Object2ObjectLinkedOpenHashMap<>();
             for (Map.Entry<String, Version> entry : loadedMods.entrySet()) {
                 String modId = entry.getKey();
                 Version version = entry.getValue();
@@ -84,60 +83,39 @@ public interface MMIntegratedServerLoader {
                 break check;
             }
             Text title = Text.translatable(TITLE, session.getDirectoryName());
-            //List<Text> messeges = new ObjectArrayList<>();
             var info = new StringJoiner(System.lineSeparator());
             info.add(title.getString());
             if (!newMods.isEmpty()) {
-                //messeges.add(Text.translatable(NEW).formatted(Formatting.AQUA));
                 info.add(Text.translatable(NEW).getString());
                 for (Map.Entry<String, Version> entry : newMods.entrySet()) {
                     String modId = entry.getKey();
                     String version = entry.getValue().getFriendlyString();
-                    //messeges.add(Text.empty()
-                    //  .append(getModName(modId))
-                    //  .append(Text.literal(" : ").formatted(Formatting.DARK_GRAY))
-                    //  .append(version));
                     info.add(modId + " " + version);
                 }
             }
             if (!deletedMods.isEmpty()) {
-                //messeges.add(Text.translatable(DELETED).formatted(Formatting.RED));
                 info.add(Text.translatable(DELETED).getString());
                 for (Map.Entry<String, Version> entry : deletedMods.entrySet()) {
                     String modId = entry.getKey();
                     String version = entry.getValue().getFriendlyString();
-                    //messeges.add(Text.empty()
-                    //  .append(getModName(modId))
-                    //  .append(Text.literal(" : ").formatted(Formatting.DARK_GRAY))
-                    //  .append(version));
                     info.add(modId + " " + version);
                 }
             }
             if (!updatedMods.isEmpty()) {
-                //messeges.add(Text.translatable(UPDATED).formatted(Formatting.GREEN));
                 info.add(Text.translatable(UPDATED).getString());
                 for (var entry : updatedMods.entrySet()) {
                     Pair<Version, Version> pair = entry.getValue();
                     String modId = entry.getKey();
                     String versionPair = pair.left().getFriendlyString() + " -> " + pair.right().getFriendlyString();
-                    //messeges.add(Text.empty()
-                    //  .append(getModName(modId))
-                    //  .append(Text.literal(" : ").formatted(Formatting.DARK_GRAY))
-                    //  .append(versionPair));
                     info.add(modId + " " + versionPair);
                 }
             }
             if (!rollbackedMods.isEmpty()) {
-                //messeges.add(Text.translatable(ROLLBACKED).formatted(Formatting.GOLD));
                 info.add(Text.translatable(ROLLBACKED).getString());
                 for (var entry : rollbackedMods.entrySet()) {
                     Pair<Version, Version> pair = entry.getValue();
                     String modId = entry.getKey();
                     String versionPair = pair.left().getFriendlyString() + " -> " + pair.right().getFriendlyString();
-                    //messeges.add(Text.empty()
-                    //  .append(getModName(modId))
-                    //  .append(Text.literal(" : ").formatted(Formatting.DARK_GRAY))
-                    //  .append(versionPair));
                     info.add(modId + " " + versionPair);
                 }
             }
@@ -173,16 +151,10 @@ public interface MMIntegratedServerLoader {
         String key = "modmenu.nameTranslation." + modId;
         if (Language.getInstance().hasTranslation(key)) {
             name = Text.translatable(key);
-            //return Text.empty()
-            //  .append(Text.translatable(key))
-            //  .append(Text.literal(" (" + modId + ")").formatted(Formatting.GRAY));
         } else {
             Optional<ModContainer> mod0 = FabricLoader.getInstance().getModContainer(modId);
             if (mod0.isPresent()) {
                 name = Text.literal(mod0.get().getMetadata().getName());
-                //return Text.empty()
-                //  .append(Text.literal(mod0.get().getMetadata().getName()))
-                //  .append(Text.literal(" (" + modId + ")").formatted(Formatting.GRAY));
             } else {
                 name = null;
             }
@@ -198,9 +170,6 @@ public interface MMIntegratedServerLoader {
                 .literal(" (" + modId + ")")
                 .append("\n")
                 .append(Text.translatable("chat.copy")))))*/;
-            //return name.fillStyle(name.getStyle()
-            //  .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal(" (" + modId + ")")))
-            //  .withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, modId)));
         }
         return copyableName/*.fillStyle(copyableName.getStyle()
           .withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, modId)))*/;

@@ -16,9 +16,12 @@
     "fabric-datagen": ["phoupraw.mcmod.loadedmodschecker.datagen.LoadedModsCheckerDataGen"],
     "modmenu": ["phoupraw.mcmod.loadedmodschecker.config.LoadedModsCheckerModMenuApi"]
   },
-  "environment": "*",
+  "environment": "client",
   "depends": {
     "fabricloader": "*"
+  },
+  "recommends": {
+    "modmenu": "*"
   },
   "mixins": ["loadedmodschecker.mixins.json"],
   "icon": "assets/loadedmodschecker/icon.png",

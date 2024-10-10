@@ -43,7 +43,7 @@ public class CheckingListWidget extends ElementListWidget<CheckingListWidget.Ent
         }
         if (!modsChanges.rollbackedMods().isEmpty()) {
             addEntry(new CategoryEntry(this, Text.translatable(MMIntegratedServerLoader.ROLLBACKED).formatted(Formatting.YELLOW)));
-            for (var entry : modsChanges.deletedMods().entrySet()) {
+            for (var entry : modsChanges.rollbackedMods().entrySet()) {
                 addEntry(new VersionPairEntry(this, FabricLoader.getInstance().getModContainer(entry.getKey()).orElseThrow(), entry.getValue()));
             }
         }
@@ -51,6 +51,18 @@ public class CheckingListWidget extends ElementListWidget<CheckingListWidget.Ent
     @Override
     public int getRowWidth() {
         return getWidth() *2/3;
+    }
+    @Override
+    protected boolean isSelectButton(int button) {
+        return true;
+    }
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (super.mouseClicked(mouseX, mouseY, button)) {
+            playDownSound(getClient().getSoundManager());
+            return true;
+        }
+        return false;
     }
     @Override
     public void drawSelectionHighlight(DrawContext context, int y, int entryWidth, int entryHeight, int borderColor, int fillColor) {
