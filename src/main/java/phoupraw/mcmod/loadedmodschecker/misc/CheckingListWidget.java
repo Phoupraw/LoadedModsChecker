@@ -20,9 +20,6 @@ public class CheckingListWidget extends ElementListWidget<CheckingListWidget.Ent
     public CheckingListWidget(MinecraftClient client, int width, int height, int y, int itemHeight, ModsChanges modsChanges, CheckingScreen parent) {
         super(client, width, height, y, itemHeight);
         this.parent = parent;
-        //for (Entry entry : entries) {
-        //    addEntry(entry);
-        //}
         if (!modsChanges.newMods().isEmpty()) {
             addEntry(new CategoryEntry(this, Text.translatable(MMIntegratedServerLoader.NEW).formatted(Formatting.AQUA)));
             for (String modId : modsChanges.newMods()) {
@@ -50,19 +47,11 @@ public class CheckingListWidget extends ElementListWidget<CheckingListWidget.Ent
     }
     @Override
     public int getRowWidth() {
-        return getWidth() *2/3;
+        return getClient().textRenderer.getWidth("000000000011111111112222222222333333333344444444445555555555");
     }
     @Override
     protected boolean isSelectButton(int button) {
         return true;
-    }
-    @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (super.mouseClicked(mouseX, mouseY, button)) {
-            playDownSound(getClient().getSoundManager());
-            return true;
-        }
-        return false;
     }
     @Override
     public void drawSelectionHighlight(DrawContext context, int y, int entryWidth, int entryHeight, int borderColor, int fillColor) {
@@ -71,10 +60,6 @@ public class CheckingListWidget extends ElementListWidget<CheckingListWidget.Ent
     public MinecraftClient getClient() {
         return client;
     }
-    //@Override
-    //public int addEntry(Entry entry) {
-    //    return super.addEntry(entry);
-    //}
     public CheckingScreen getParent() {
         return parent;
     }
@@ -92,14 +77,6 @@ public class CheckingListWidget extends ElementListWidget<CheckingListWidget.Ent
         public List<? extends Element> children() {
             return List.of();
         }
-        //@Override
-        //public void render(DrawContext context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
-        //    for (Element child : children()) {
-        //        if (child instanceof Drawable drawable) {
-        //            drawable.render(context, mouseX, mouseY, tickDelta);
-        //        }
-        //    }
-        //}
     }
     
 }

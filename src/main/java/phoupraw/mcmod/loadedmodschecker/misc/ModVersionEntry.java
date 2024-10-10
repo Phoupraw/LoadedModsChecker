@@ -55,6 +55,7 @@ public abstract class ModVersionEntry extends CheckingListWidget.Entry {
         boolean r = super.mouseClicked(mouseX, mouseY, button);
         if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
             parent.getClient().keyboard.setClipboard(getModId());
+            parent.playDownSound(parent.getClient().getSoundManager());
             return true;
         }
         return r;
@@ -68,6 +69,12 @@ public abstract class ModVersionEntry extends CheckingListWidget.Entry {
     }
     @MustBeInvokedByOverriders
     protected void modifyTooltip(List<Text> tooltip) {
-        tooltip.add(Text.translatable(COPY).formatted(Formatting.GRAY,Formatting.ITALIC));
+        tooltip.add(Text.translatable(COPY).formatted(Formatting.GRAY, Formatting.ITALIC));
     }
+    //@Override
+    //protected void afterMouseClicked(double mouseX, double mouseY, int button, boolean result) {
+    //    if (result) {
+    //        parent.playDownSound(parent.getClient().getSoundManager());
+    //    }
+    //}
 }

@@ -81,6 +81,10 @@ public class NewModEntry extends ModVersionEntry {
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         boolean r = super.mouseClicked(mouseX, mouseY, button);
         if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT && FabricLoader.getInstance().isModLoaded(ModMenu.MOD_ID)) {
+            if (!r) {
+                //TODO 十分丑陋的代码
+                parent.playDownSound(parent.getClient().getSoundManager());
+            }
             jumpToModMenu(parent.getClient(), parent.getParent(), getModId());
             return true;
         }

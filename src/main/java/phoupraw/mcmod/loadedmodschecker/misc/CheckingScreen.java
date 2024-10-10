@@ -14,9 +14,6 @@ import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class CheckingScreen extends Screen {
-    //@ApiStatus.Obsolete
-    //private final @Nullable Screen parent;
-    //this.parent = parent;
     private final ThreePartsLayoutWidget rootLayout = new ThreePartsLayoutWidget(this);
     private final String info;
     private final ModsChanges modsChanges;
@@ -25,21 +22,6 @@ public class CheckingScreen extends Screen {
         super(title);
         this.info = info;
         this.modsChanges = modsChanges;
-        //var bodyText = Text.empty();
-        //for (Iterator<Text> iterator = lines.iterator(); iterator.hasNext(); ) {
-        //    Text line = iterator.next();
-        //    bodyText.append(line);
-        //    if (iterator.hasNext()) {
-        //        bodyText.append("\n");
-        //    }
-        //}
-    }
-    @Override
-    public void close() {
-        //onClose.run();
-        //if (client!=null&&parent!=null) {
-        //    client.setScreen(parent);
-        //}
     }
     @Override
     public void init() {
@@ -48,7 +30,6 @@ public class CheckingScreen extends Screen {
         ButtonWidget continueButton = ButtonWidget.builder(Text.translatable("gui.continue"), this::onClickContinue).build();
         ButtonWidget copyButton = ButtonWidget.builder(Text.translatable("chat.copy"), this::onClickCopy).build();
         ButtonWidget backButton = ButtonWidget.builder(Text.translatable("gui.back"), this::onClickBack).build();
-        //rootLayout.setFooterHeight(continueButton.getHeight() + 100);
         bodyWidget = new CheckingListWidget(client, width, rootLayout.getContentHeight(), rootLayout.getHeaderHeight(), textRenderer.fontHeight + 4, modsChanges, this);
         rootLayout.addBody(bodyWidget);
         List<ButtonWidget> footButtons = Arrays.asList(continueButton, copyButton, backButton);
@@ -68,12 +49,10 @@ public class CheckingScreen extends Screen {
     }
     @Override
     protected void initTabNavigation() {
+        getBodyWidget().setWidth(width);
+        getBodyWidget().setHeight(rootLayout.getContentHeight());
         rootLayout.refreshPositions();
     }
-    //@SuppressWarnings("unchecked")
-    //public <T extends AxisGridWidget & AWrapperWidget> T getFootLayout() {
-    //    return (T) footLayout;
-    //}
     public CheckingListWidget getBodyWidget() {
         return bodyWidget;
     }

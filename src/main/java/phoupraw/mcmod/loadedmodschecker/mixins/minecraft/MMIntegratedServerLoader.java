@@ -131,7 +131,6 @@ public interface MMIntegratedServerLoader {
             CheckingScreen screen = new CheckingScreen(title, info.toString(), new ModsChanges(newMods.keySet(), deletedMods, updatedMods1, rollbackedMods1)) {
                 @Override
                 public void close() {
-                    super.close();
                     session.tryClose();
                     onCancel.run();
                 }
