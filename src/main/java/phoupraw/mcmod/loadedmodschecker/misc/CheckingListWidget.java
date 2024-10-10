@@ -44,6 +44,9 @@ public class CheckingListWidget extends ElementListWidget<CheckingListWidget.Ent
                 addEntry(new VersionPairEntry(this, FabricLoader.getInstance().getModContainer(entry.getKey()).orElseThrow(), entry.getValue()));
             }
         }
+        for (Entry child : children()) {
+            child.init();
+        }
     }
     @Override
     public int getRowWidth() {
@@ -76,6 +79,9 @@ public class CheckingListWidget extends ElementListWidget<CheckingListWidget.Ent
         @Override
         public List<? extends Element> children() {
             return List.of();
+        }
+        protected void init() {
+        
         }
     }
     

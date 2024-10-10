@@ -12,6 +12,9 @@ public class DeletedModEntry extends ModVersionEntry {
         super(parent);
         this.modId = modId;
         this.version = version;
+        //leftTextWidget.setMessage(getModName());
+        //rightTextWidget.setMessage(getVersionText());
+        //adjustTextsWidth();
     }
     @Override
     public Text getModName() {
